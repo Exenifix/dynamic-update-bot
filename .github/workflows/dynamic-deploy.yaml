@@ -11,7 +11,7 @@ jobs:
     environment: production
     steps:
       - name: Deploy
-        working-directory: ${{ BOT_DIR_PATH }}
+        working-directory: ${{ env.BOT_DIR_PATH }}
         run: |
           git pull -f
           ./.github/deploy/deploy.sh
