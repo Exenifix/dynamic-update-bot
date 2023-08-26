@@ -19,6 +19,8 @@ if [ "$container_active" = true ]; then
       break
     fi
   done
+else
+  restart_required=true
 fi
 
 if [ "$restart_required" = true ]; then
