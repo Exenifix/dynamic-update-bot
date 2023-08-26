@@ -1,10 +1,15 @@
 #!/bin/bash
 set -e
 
+container_name=dynamic-update-bot
+
 readarray -t critical_files < <(yq '.critical_files[]' .github/deploy/deploy-config.yaml)
 changed_files=$(git diff --name-only HEAD~1 HEAD)
 restart_required=false
-container_active=$(docker inspect -f '{{.State.Running}}' "dynamic-update-bot" 2>/dev/null || false)
+container_active=false
+if [ $( docker ps -a | grep $container_name | wc -l ) -gt 0 ] && [ docker inspect -f '{{.State.Running}}' $container_name ]; then
+  container_active=true
+fi
 
 # if there's no container no need to check for files
 if [ "$container_active" = true ]; then
