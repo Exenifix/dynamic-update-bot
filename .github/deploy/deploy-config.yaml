@@ -1,0 +1,5 @@
+critical_files:
+  - main.py
+  - api.py
+  - bot.py
+  - poetry.lock

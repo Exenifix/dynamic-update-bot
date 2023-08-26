@@ -1,0 +1,20 @@
+name: Dynamic Deploy
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: [self-hosted]
+    environment: production
+    steps:
+      - name: Deploy
+        run: |
+          cd $BOT_DIR_PATH
+          git pull -f
+          ./.github/deploy/deploy.sh
+    env:
+      TOKEN: ${{ secrets.TOKEN }}
+      API_SECRET: ${{ secrets.API_SECRET }}

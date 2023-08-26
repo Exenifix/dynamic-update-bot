@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "dynamic-update-bot"
+version = "0.1.0"
+description = ""
+authors = ["Exenifix"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+disnake = "^2.9.0"
+aiohttp = "^3.8.5"
+exenenv = "^1.2"
+exencolorlogs = "^1.1.1"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+ruff = "^0.0.286"
+isort = "^5.12.0"
+pre-commit = "^3.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
