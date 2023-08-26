@@ -30,7 +30,7 @@ if [ "$restart_required" = true ]; then
     echo "Container is not up, performing first run."
   fi
   docker compose up -d --build
-  python3 -m exendlr bobux-prod "ready"
+  python3 -m exendlr $container_name "ready"
   docker image prune -f
 else
   echo "No changes in critical files, applying update without restart."
