@@ -13,8 +13,7 @@ jobs:
       - name: Deploy
         working-directory: ${{ vars.BOT_DIR_PATH }}
         run: |
-          echo $(pwd)
-          git pull -f
+          git pull -fq
           ./.github/deploy/deploy.sh
     env:
       TOKEN: ${{ secrets.TOKEN }}

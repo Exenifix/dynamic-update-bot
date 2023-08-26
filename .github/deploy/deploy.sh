@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-readarray -t critical_files < <(yq r .github/deploy/deploy-config.yaml critical_files[*])
+readarray -t critical_files < <(yq '.critical_files[]' .github/deploy/deploy-config.yaml)
 changed_files=$(git diff --name-only HEAD~1 HEAD)
 restart_required=false
 container_active=$(docker inspect -f '{{.State.Running}}' "dynamic-update-bot" 2>/dev/null || false)
