@@ -24,12 +24,10 @@ new_commit=$(git rev-parse HEAD)
 echo "Successfully pulled, ${prev_commit:0:7}...${new_commit:0:7}"
 
 echo "Checking container activity..."
-container_active=false
-if [ $( docker ps -a | grep $container_name | wc -l ) -gt 0 ] && [ docker inspect -f '{{.State.Running}}' $container_name ]; then
-  container_active=true
-fi
-echo ((container_active="true" ? "Container active" : "Container inactive"))
-if [ "$container_active" = false ]; then
+if docker inspect -f '{{.State.Running}}' $container_name > /dev/null 2>&1 && [ $? -eq 0 ]; then
+  echo "Container is active"
+else
+  echo "Container is inactive, performing start"
   docker_restart
   exit 0
 fi
