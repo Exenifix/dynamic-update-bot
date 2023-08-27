@@ -23,6 +23,14 @@ git pull -fq
 new_commit=$(git rev-parse HEAD)
 echo "Successfully pulled, ${prev_commit:0:7}...${new_commit:0:7}"
 
+handle_error() {
+  echo "Error occurred, rolling back to previous commit"
+  git reset --hard $prev_commit
+  exit 1
+}
+
+trap 'handle_error' ERR
+
 echo "Checking container activity..."
 if docker inspect -f '{{.State.Running}}' $container_name > /dev/null 2>&1 && [ $? -eq 0 ]; then
   echo "Container is active"
