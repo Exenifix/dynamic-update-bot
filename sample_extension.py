@@ -10,7 +10,7 @@ class SampleCog(Cog):
         """
         Sample command
         """
-        await inter.send("Hi")
+        await inter.send(f"Hi {inter.user.mention}")
 
     @tasks.loop(seconds=3, count=3)
     async def sample_loop(self):
