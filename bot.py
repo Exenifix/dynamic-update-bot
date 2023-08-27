@@ -17,9 +17,9 @@ class Bot(commands.InteractionBot):
         self.log = Logger()
 
     def run(self) -> None:
-        self.log.info("Loading extension...")
+        self.log.info("Loading extensions...")
         self.load_extension("sample_extension")
-        self.log.ok("Extension loaded")
+        self.log.ok("Extensions loaded")
         self.log.info("Connecting...")
         super().run(env.env.TOKEN)
 
