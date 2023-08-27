@@ -13,7 +13,7 @@ docker_restart() {
 
 update() {
   echo "Performing request to running bot..."
-  curl -X POST -H "Authorisation: $API_SECRET" http://localhost:3030/update
+  curl -s -X POST -H "Authorisation: $API_SECRET" http://localhost:3030/update
   echo "Request done"
 }
 
