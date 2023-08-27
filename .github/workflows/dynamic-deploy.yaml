@@ -10,9 +10,15 @@ jobs:
     runs-on: [self-hosted]
     environment: production
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get latest script
+        run: echo "SCRIPT_PATH=$(pwd)/.github/deploy/deploy.sh" >> $GITHUB_ENV
+
       - name: Deploy
         working-directory: ${{ vars.BOT_DIR_PATH }}
-        run: ./.github/deploy/deploy.sh
+        run: ${{ env.SCRIPT_PATH }}
 
     env:
       TOKEN: ${{ secrets.TOKEN }}
