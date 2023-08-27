@@ -32,7 +32,7 @@ handle_error() {
 trap 'handle_error' ERR
 
 echo "Checking container activity..."
-if docker inspect -f '{{.State.Running}}' $container_name > /dev/null 2>&1 && [ $? -eq 0 ]; then
+if [ "$(docker inspect -f '{{.State.Running}}' $container_name 2>/dev/null)" = "true" ]; then
   echo "Container is active"
 else
   echo "Container is inactive, performing start"
